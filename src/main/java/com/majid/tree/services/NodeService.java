@@ -1,7 +1,6 @@
 package com.majid.tree.services;
 
 import com.majid.tree.domain.Node;
-import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -12,16 +11,13 @@ public interface NodeService {
 
     Node getRoot();
 
-    List<Node> changeParent(String nodeId, String newParentId);
+    int changeParent(Long nodeId, Long newParentId);
 
-    Node addNode(Node node, String parentId);
+    Node addNode(Node node, Long parentId);
 
-    List<Node> getChildren(String nodeId);
+    List<Node> getChildren(Long nodeId);
 
-    Node getById(String nodeId);
+    List<Node> getAllChildren(Long nodeId);
 
-//    List<Node> listAll();
-//
-//
-//    Node saveOrUpdate(Node node);
+    Node getById(Long nodeId);
 }

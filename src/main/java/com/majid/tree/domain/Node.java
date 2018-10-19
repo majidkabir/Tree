@@ -1,27 +1,46 @@
 package com.majid.tree.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.util.StringUtils;
+
+import javax.persistence.*;
 
 /**
  * Created by Majid Ghaffuri on 10/18/2018.
  */
-@Document(collection = "node")
+
+@Entity
+@Table(name="node")
 public class Node {
 
     @Id
-    private String  _id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
+    @Column(columnDefinition = "TEXT")
     private String path;
-    private String parentId;
 
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
+    public Node() {
     }
 
-    public String getParentId() {
-        return parentId;
+    public Node(String name, String path) {
+        this.name = name;
+        this.path = path;
+    }
+
+    public Long getParentId() {
+        if (path == null || path.isEmpty())
+            return null;
+
+        int index = path.lastIndexOf(',', path.length() - 2) + 1;
+
+        return Long.valueOf(path.substring(index, path.length() - 1));
+    }
+
+    public Long getRootId() {
+        if (path == null || path.isEmpty())
+            return id; // This is the root node
+
+        return Long.valueOf(path.substring(0, path.indexOf(',')));
     }
 
     public void setName(String name) {
@@ -32,12 +51,12 @@ public class Node {
         return name;
     }
 
-    public String get_id() {
-        return _id;
+    public Long getId() {
+        return id;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getPath() {
@@ -53,6 +72,6 @@ public class Node {
     }
 
     public String getChildrenPath() {
-        return (getPath() == null ? "": getPath()) + get_id() + ",";
+        return (getPath() == null ? "": getPath()) + getId() + ",";
     }
 }
