@@ -6,7 +6,7 @@
 	<groupId>com.majid</groupId>
 	<artifactId>tree</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>tree</name>
 	<description>Demo project for Spring Boot</description>

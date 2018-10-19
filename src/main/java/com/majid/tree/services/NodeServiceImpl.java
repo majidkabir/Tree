@@ -40,14 +40,12 @@ public class NodeServiceImpl implements NodeService {
         Node node = mongoTemplate.findById(nodeId, Node.class);
         Node newParentNode = mongoTemplate.findById(newParentId, Node.class);
 
+        String oldPrefixPath = node.getChildrenPath();
+
         node.setParentId(newParentNode.get_id());
+        node.setPath(newParentNode.getChildrenPath());
 
-        String oldPrefixPath = node.getPath() + node.get_id() + ",";
-
-        String parentPath = newParentNode.getPath() == null ? "" : newParentNode.getPath();
-        node.setPath(parentPath + newParentNode.get_id() + ",");
-
-        String newPrefixPath = node.getPath() + node.get_id() + ",";;
+        String newPrefixPath = node.getChildrenPath();
 
         Query pathQuery = Query.query(new Criteria("path").regex(new BsonRegularExpression("^" + oldPrefixPath + ".*")));
 

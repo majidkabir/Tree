@@ -15,7 +15,6 @@ public class Node {
     private String name;
     private String path;
     private String parentId;
-    private int height;
 
     public void setParentId(String parentId) {
         this.parentId = parentId;
@@ -46,11 +45,14 @@ public class Node {
     }
 
     public void setPath(String path) {
-        height = StringUtils.countOccurrencesOf(path, ",");
         this.path = path;
     }
 
-    public int getHeight(){
-        return height;
+    public int getHeight() {
+        return StringUtils.countOccurrencesOf(path, ",");
+    }
+
+    public String getChildrenPath() {
+        return (getPath() == null ? "": getPath()) + get_id() + ",";
     }
 }
