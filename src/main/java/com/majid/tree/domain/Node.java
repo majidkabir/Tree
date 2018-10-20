@@ -16,6 +16,7 @@ public class Node {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    /* Path is a string that contains all ancestors ids from root to parent of this node */
     @Column(columnDefinition = "TEXT")
     private String path;
 
@@ -28,7 +29,9 @@ public class Node {
     }
 
     public Long getParentId() {
-        if (path == null || path.isEmpty())
+        /* The last id in the path string is the parent id */
+
+        if (path == null || path.isEmpty()) /* This is the root node and the root node don't has parent */
             return null;
 
         int index = path.lastIndexOf(',', path.length() - 2) + 1;
@@ -37,8 +40,10 @@ public class Node {
     }
 
     public Long getRootId() {
+        /* The first id in the path string is the root id */
+
         if (path == null || path.isEmpty())
-            return id; // This is the root node
+            return id; /* This is the root node */
 
         return Long.valueOf(path.substring(0, path.indexOf(',')));
     }
@@ -68,10 +73,14 @@ public class Node {
     }
 
     public int getHeight() {
+        /* In the path property each id is separated by ',' character and an extra ',' character at the end of it,
+           and root node path is null, with this definition height of a node is number of ',' character in the path.
+           */
         return StringUtils.countOccurrencesOf(path, ",");
     }
 
     public String getChildrenPath() {
+        /* Path of children of this node is path this node plus id of this node with an extra ',' character at the end */
         return (getPath() == null ? "": getPath()) + getId() + ",";
     }
 }
