@@ -16,6 +16,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
+ * This test should be run on an empty database and order of the test methods is important
+ *
  * Created by Majid Ghaffuri on 10/19/2018.
  */
 
@@ -32,7 +34,7 @@ public class NodeControllerIntegrationTests {
 
     @Test
     public void test() throws Exception{
-        mockMvc.perform(put("/node/add/1")
+        mockMvc.perform(put("/node/add/0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"A\"}"))
                 .andDo(print())
