@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class NodeControllerTests {
+public class NodeControllerIntegrationTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -32,13 +32,13 @@ public class NodeControllerTests {
 
     @Test
     public void test() throws Exception{
-        mockMvc.perform(put("/node/add/0")
+        mockMvc.perform(put("/node/add/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"A\"}"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("_id").isString())
-                .andExpect(MockMvcResultMatchers.jsonPath("name").value("A"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.responseObject.id").isNumber())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.responseObject.name").value("A"))
                 .andReturn();
     }
 }

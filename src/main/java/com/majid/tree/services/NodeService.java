@@ -9,15 +9,13 @@ import java.util.List;
  */
 public interface NodeService {
 
-    Node getRoot();
+    ServiceResponse<Integer> changeParent(Long nodeId, Long newParentId);
 
-    int changeParent(Long nodeId, Long newParentId);
+    ServiceResponse<Node> addNode(Node node, Long parentId);
 
-    Node addNode(Node node, Long parentId);
+    ServiceResponse<List<Node>> getChildren(Long nodeId);
 
-    List<Node> getChildren(Long nodeId);
+    ServiceResponse<List<Node>> getAllChildren(Long nodeId);
 
-    List<Node> getAllChildren(Long nodeId);
-
-    Node getById(Long nodeId);
+    ServiceResponse<Node> getById(Long nodeId);
 }
