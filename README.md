@@ -67,3 +67,6 @@ You can get the app docker image with running the following command:
     
     # docker pull majidkabir/tree
 Before running this image you shoud start the postgres docker.
+
+# Extra Information
+Extra information can be found [here](https://github.com/majidkabir/Tree/wiki)
