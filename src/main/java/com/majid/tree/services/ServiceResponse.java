@@ -29,11 +29,6 @@ public class ServiceResponse<T> {
         return error.getDescription();
     }
 
-    public ServiceResponse setError(Error error){
-        this.error = error;
-        return this;
-    }
-
     public static ServiceResponse Error(Error error) {
         ServiceResponse serviceResponse = new ServiceResponse();
         serviceResponse.error = error;

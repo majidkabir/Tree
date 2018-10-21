@@ -19,13 +19,11 @@ public class ServiceResponseUnitTest {
 
     @Test
     public void testErrorCodeProperty() {
-        Assert.assertEquals(new ServiceResponse<>().setError(Error.NODE_NOT_FOUND).getErrorCode(), Error.NODE_NOT_FOUND.getCode());
-        Assert.assertEquals(ServiceResponse.Error(Error.NODE_NOT_FOUND).getErrorCode(), Error.NODE_NOT_FOUND.getCode());
+        Assert.assertEquals(ServiceResponse.Error(Error.NODE_NOT_FOUND), Error.NODE_NOT_FOUND);
     }
 
     @Test
     public void testErrorMessageProperty() {
-        Assert.assertEquals(new ServiceResponse<>().setError(Error.NODE_NOT_FOUND).getErrorMessage(), Error.NODE_NOT_FOUND.getDescription());
-        Assert.assertEquals(ServiceResponse.Error(Error.NODE_NOT_FOUND).getErrorMessage(), Error.NODE_NOT_FOUND.getDescription());
+        Assert.assertEquals(ServiceResponse.Error(Error.NODE_NOT_FOUND), Error.NODE_NOT_FOUND);
     }
 }

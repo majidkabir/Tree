@@ -2,12 +2,7 @@ package com.majid.tree.domain;
 
 import org.springframework.util.StringUtils;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.GenerationType;
-import javax.persistence.Column;
+import javax.persistence.*;
 
 /**
  * This class represent the node entity.

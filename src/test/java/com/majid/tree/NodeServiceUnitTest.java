@@ -2,7 +2,7 @@ package com.majid.tree;
 
 import com.majid.tree.domain.Node;
 import com.majid.tree.repository.NodeRepository;
-import com.majid.tree.services.NodeServiceImpl;
+import com.majid.tree.services.NodeService;
 import com.majid.tree.services.ServiceResponse;
 import com.majid.tree.util.Error;
 import org.junit.Assert;
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.majid.tree.util.Error.NODE_NOT_FOUND;
-import static com.majid.tree.util.Error.THIS_PROPERTIES_SHOULD_BE_NULL;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
@@ -32,7 +31,7 @@ public class NodeServiceUnitTest {
     NodeRepository nodeRepositoryMock;
 
     @InjectMocks
-    NodeServiceImpl nodeService;
+    NodeService nodeService;
 
     @Test
     public void testGetById(){

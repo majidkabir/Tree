@@ -2,6 +2,7 @@ package com.majid.tree.util;
 
 /**
  * enum class for handling error code and error messages
+ *
  * Created by Majid Ghaffuri on 10/21/2018.
  */
 public enum  Error {

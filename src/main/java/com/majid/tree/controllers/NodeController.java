@@ -1,15 +1,11 @@
 package com.majid.tree.controllers;
 
 import com.majid.tree.domain.Node;
-import com.majid.tree.services.NodeServiceImpl;
+import com.majid.tree.services.NodeService;
 import com.majid.tree.services.ServiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -24,7 +20,7 @@ import java.util.List;
 public class NodeController {
 
     @Autowired
-    private NodeServiceImpl nodeService;
+    private NodeService nodeService;
 
     @RequestMapping("/get/{nodeId}")
     public ResponseEntity<ServiceResponse<Node>> changeParent(@PathVariable Long nodeId) {
