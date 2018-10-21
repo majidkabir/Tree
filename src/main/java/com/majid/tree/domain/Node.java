@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 
 /**
- * This class is represent the entity of node.
+ * This class represent the node entity.
  *
  * Created by Majid Ghaffuri on 10/18/2018.
  */
@@ -23,7 +23,7 @@ public class Node {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    /* Path is a string that contains all ancestors ids from root to parent of this node */
+    /* Path is a string that contains all ancestor ids from root to parent of this node */
     @Column(columnDefinition = "TEXT")
     private String path;
 
@@ -38,7 +38,7 @@ public class Node {
     public Long getParentId() {
         /* The last id in the path string is the parent id */
 
-        if (path == null || path.isEmpty()) /* This is the root node and the root node don't has parent */
+        if (path == null || path.isEmpty()) /* This is the root node and the root node doesn't have parent */
             return null;
 
         int index = path.lastIndexOf(',', path.length() - 2) + 1;

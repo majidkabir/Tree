@@ -1,18 +1,14 @@
 package com.majid.tree.services;
 
-import com.majid.tree.util.ErrorHelper;
-
-import java.util.Objects;
-import java.util.logging.ErrorManager;
+import com.majid.tree.util.Error;
 
 /**
- * This class for wrapping the response object in another object for getting the specific errors in client side
+ * This class for wraps the response object in another object for getting the specific errors in client side
  *
  * Created by Majid Ghaffuri on 10/20/2018.
  */
 public class ServiceResponse<T> {
-    private int errorCode;
-    private String errorMessage;
+    private Error error = Error.SUCCESS;
     private T responseObject;
 
     public ServiceResponse(){}
@@ -26,17 +22,21 @@ public class ServiceResponse<T> {
     }
 
     public int getErrorCode() {
-        return errorCode;
-    }
-
-    public ServiceResponse setErrorCode(int errorCode) {
-        this.errorCode = errorCode;
-        this.errorMessage = ErrorHelper.getMessage(errorCode);
-
-        return this;
+        return error.getCode();
     }
 
     public String getErrorMessage() {
-        return errorMessage;
+        return error.getDescription();
+    }
+
+    public ServiceResponse setError(Error error){
+        this.error = error;
+        return this;
+    }
+
+    public static ServiceResponse Error(Error error) {
+        ServiceResponse serviceResponse = new ServiceResponse();
+        serviceResponse.error = error;
+        return serviceResponse;
     }
 }

@@ -4,7 +4,7 @@ import com.majid.tree.domain.Node;
 import com.majid.tree.repository.NodeRepository;
 import com.majid.tree.services.NodeServiceImpl;
 import com.majid.tree.services.ServiceResponse;
-import com.majid.tree.util.ErrorHelper;
+import com.majid.tree.util.Error;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +15,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.majid.tree.util.Error.NODE_NOT_FOUND;
+import static com.majid.tree.util.Error.THIS_PROPERTIES_SHOULD_BE_NULL;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
@@ -41,19 +43,19 @@ public class NodeServiceUnitTest {
 
         when(nodeRepositoryMock.getNodeById(234L)).thenReturn(null);
         ServiceResponse<Node> serviceResponse2 = nodeService.getById(234L);
-        Assert.assertEquals(ErrorHelper.NODE_NOT_FOUND, serviceResponse2.getErrorCode());
+        Assert.assertEquals(Error.NODE_NOT_FOUND.getCode(), serviceResponse2.getErrorCode());
     }
 
     @Test
     public void testAddNodeErrorSituations(){
         Node node1 = new Node("A", "1,");
-        Assert.assertEquals(ErrorHelper.THIS_PROPERTIES_SHOULD_BE_NULL, nodeService.addNode(node1, 0L).getErrorCode());
+        Assert.assertEquals(Error.THIS_PROPERTIES_SHOULD_BE_NULL.getCode(), nodeService.addNode(node1, 0L).getErrorCode());
 
         when(nodeRepositoryMock.getNodeById(anyLong())).thenReturn(null);
-        Assert.assertEquals(ErrorHelper.PARENT_NOT_FOUND, nodeService.addNode(new Node(), 1L).getErrorCode());
+        Assert.assertEquals(Error.PARENT_NOT_FOUND.getCode(), nodeService.addNode(new Node(), 1L).getErrorCode());
 
         when(nodeRepositoryMock.getRoot()).thenReturn(new Node());
-        Assert.assertEquals(ErrorHelper.ROOT_ALREADY_EXIST, nodeService.addNode(new Node("22", null), 0L).getErrorCode());
+        Assert.assertEquals(Error.ROOT_ALREADY_EXIST.getCode(), nodeService.addNode(new Node("22", null), 0L).getErrorCode());
     }
 
     @Test
@@ -77,21 +79,21 @@ public class NodeServiceUnitTest {
     @Test
     public void testAddNodeSuccessFirstRootNode(){
         when(nodeRepositoryMock.getRoot()).thenReturn(null);
-        Assert.assertEquals(ErrorHelper.SUCCESS, nodeService.addNode(new Node(), 0L).getErrorCode());
+        Assert.assertEquals(Error.SUCCESS.getCode(), nodeService.addNode(new Node(), 0L).getErrorCode());
     }
 
     @Test
     public void testChangeParentErrorSituations(){
         when(nodeRepositoryMock.getNodeById(1L)).thenReturn(new Node());
         when(nodeRepositoryMock.getNodeById(22L)).thenReturn(null);
-        Assert.assertEquals(ErrorHelper.NODE_NOT_FOUND, nodeService.changeParent(22L, 1L).getErrorCode());
-        Assert.assertEquals(ErrorHelper.PARENT_NOT_FOUND, nodeService.changeParent(1L, 22L).getErrorCode());
+        Assert.assertEquals(NODE_NOT_FOUND.getCode(), nodeService.changeParent(22L, 1L).getErrorCode());
+        Assert.assertEquals(Error.PARENT_NOT_FOUND.getCode(), nodeService.changeParent(1L, 22L).getErrorCode());
     }
 
     @Test
     public void testGetChildrenErrorSituation(){
         when(nodeRepositoryMock.getNodeById(22L)).thenReturn(null);
-        Assert.assertEquals(ErrorHelper.NODE_NOT_FOUND, nodeService.getChildren(22L).getErrorCode());
+        Assert.assertEquals(Error.NODE_NOT_FOUND.getCode(), nodeService.getChildren(22L).getErrorCode());
     }
 
     @Test

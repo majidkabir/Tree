@@ -51,4 +51,19 @@ You can run it with this command:
 You can use the war file as a executable and deployable war file.
 Copy the war file to an application server web container and start it.
 
-# Create production docker
+# Deploy on a server with docker
+You should change the database address from localhost to app-db in *application.properties* file, before building the project.    
+After building the project, copy the created war file to *./docker/web-docker/*
+    
+    # cp target/tree.0.0.1-SNAPSHOT.war docker/web-docker/
+Copy docker folder to your server and run docker-compose command
+
+    # docker-compose up
+
+This command start 3 docker container, one for PostgreSQL database, one for tomcat web server and one for storing the PostgreSQL data.
+
+# Production ready docker
+You can get the app docker image with running the following command:
+    
+    # docker pull majidkabir/tree
+Before running this image you shoud start the postgres docker.

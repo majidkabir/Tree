@@ -5,7 +5,7 @@ import com.majid.tree.domain.Node;
 import java.util.List;
 
 /**
- * This class is a service class that manage all the operation on {@link Node} entity.
+ * This class is a service class that manages all the operation on {@link Node} an entity.
  *
  * Created by Majid Ghaffuri on 10/18/2018.
  */
@@ -13,7 +13,7 @@ public interface NodeService {
 
     /**
      * Changing parent of a node, that means, moving a subtree of main tree from one node to another node,
-     * this method change the path of all nodes in the subtree.
+     * this method changes the path of all nodes in the subtree.
      *
      * @param nodeId {@link Node} that we want to change the parent
      * @param newParentId New parent {@link Node}
@@ -33,7 +33,7 @@ public interface NodeService {
     /**
      * Get first level children of a node.
      *
-     * @param nodeId The id of the node that we want to get the children
+     * @param nodeId The ID of the parent node that we want to get the children
      * @return {@link ServiceResponse} that contains {@link List} of {@link Node} those are children of the node
      */
     ServiceResponse<List<Node>> getChildren(Long nodeId);
@@ -41,13 +41,13 @@ public interface NodeService {
     /**
      * Get all children of a node, in all levels.
      *
-     * @param nodeId The id of the node that we want to get the children
+     * @param nodeId The ID of the parent node that we want to get the children
      * @return {@link ServiceResponse} that contains {@link List} of {@link Node} those are children of the node
      */
     ServiceResponse<List<Node>> getAllChildrenByPath(Long nodeId);
 
     /**
-     * Get a {@link Node} by its Ids
+     * Get a {@link Node} by its Id
      *
      * @param nodeId Id of the node
      * @return {@link ServiceResponse} that contains a {@link Node}

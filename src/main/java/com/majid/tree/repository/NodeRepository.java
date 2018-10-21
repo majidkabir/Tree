@@ -55,37 +55,32 @@ public class NodeRepository {
      * @return Number of node that affected by this query
      */
     public int changeParent(String oldPrefixPath, String newPrefixPath) {
-        int result = entityManager.createNativeQuery("UPDATE node SET path = :newPrefixPath || SUBSTRING(path,:oldPrefixLen) WHERE path LIKE :oldPrefixPath || '%'")
+        return entityManager.createNativeQuery("UPDATE node SET path = :newPrefixPath || SUBSTRING(path,:oldPrefixLen) WHERE path LIKE :oldPrefixPath || '%'")
                 .setParameter("newPrefixPath", newPrefixPath)
                 .setParameter("oldPrefixLen", oldPrefixPath.length() + 1)
                 .setParameter("oldPrefixPath", oldPrefixPath)
                 .executeUpdate();
-        return result;
     }
 
     /**
      * Persisting the node to database
      *
      * @param node {@link Node} to persist in database
-     * @return {@link Node} that persisted in database
      */
-    public Node saveNode(Node node){
+    public void saveNode(Node node){
         entityManager.persist(node);
-        return node;
     }
 
     /**
-     * Get all nodes that exactly have this path
+     * Get all sibling nodes that exactly have this path
      *
      * @param path Path of the nodes
      * @return List of the nodes that matches
      */
     public List<Node> getNodesByPath(String path){
-        List<Node> nodes = entityManager.createQuery("SELECT e FROM Node e WHERE e.path = :parentPath", Node.class)
+        return entityManager.createQuery("SELECT e FROM Node e WHERE e.path = :parentPath", Node.class)
                 .setParameter("parentPath", path)
                 .getResultList();
-
-        return nodes;
     }
 
     /**
@@ -95,10 +90,8 @@ public class NodeRepository {
      * @return List of the nodes that matches
      */
     public List<Node> getNodesAndChildrenByPath(String path){
-        List<Node> nodes =  entityManager.createQuery("SELECT e FROM Node e WHERE e.path LIKE :path", Node.class)
+        return   entityManager.createQuery("SELECT e FROM Node e WHERE e.path LIKE :path", Node.class)
                 .setParameter("path", path + '%')
                 .getResultList();
-
-        return nodes;
     }
 }
