@@ -1,1 +1,0 @@
-INSERT INTO nodes(name) VALUES('Root Node');
